@@ -14,6 +14,13 @@
     -moz-transition: width 0.1s ease-out;
 }
 
+#notification_area #grip {
+    cursor: ew-resize;
+    height: 100%;
+    width: 10px;
+    float: left;
+}
+
 #notification_area .notification_section {
     margin-left: 20px;
     color: white;
