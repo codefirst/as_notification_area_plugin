@@ -1,0 +1,31 @@
+#notification_area {
+    position: fixed;
+    height: 100%;
+    overflow: scroll;
+    top: 0px;
+    right: 0px;
+    width: 0px;
+    background: url(/grey_wash_wall_@2X.png);
+
+    box-shadow: inset 10px 0px 10px rgba(0,0,0,0.4);
+    transition: width 0.2s ease-out;
+    -webkit-box-shadow: inset 10px 0px 10px rgba(0,0,0,0.4);
+    -webkit-transition: width 0.2s ease-out;
+    -moz-box-shadow: inset 10px 0px 10px rgba(0,0,0,0.4);
+    -moz-transition: width 0.2s ease-out;
+}
+#open_button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: orange;
+}
+
+.main {
+    transition: transform 0.2s ease-out;
+    -webkit-transition: -webkit-transform 0.2s ease-out;
+    -moz-transition: -moz-transform 0.2s ease-out;
+}
