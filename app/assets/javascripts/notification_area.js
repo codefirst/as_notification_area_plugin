@@ -1,7 +1,7 @@
-var notificationArea = (function(){
-    function resizeSidebar(sidebarWidth){
+(function(){
+    function resizeSidebar(width){
         var distance =
-            (document.body.clientWidth - (mainWidth + widthMargin)) / 2 - sidebarWidth;
+            (document.body.clientWidth - (mainWidth + widthMargin)) / 2 - width;
         if (distance > 0) {
             distance = 0;
         }
@@ -11,7 +11,7 @@ var notificationArea = (function(){
             "-webkit-transform" : "translate("+distance+"px, 0px)",
             "-moz-transform" : "translate("+distance+"px, 0px)",
         });
-        notificationArea.css("width", ""+sidebarWidth+"px");
+        notificationArea.css("width", ""+width+"px");
     }
     function enableAnimation(){
         $("#notification_area").css({
@@ -38,7 +38,10 @@ var notificationArea = (function(){
         });
     }
 
-    var sidebarWidth = 400;
+    var sidebarInfo = $.LocalStorage.get("sidebarInfo", {
+        opened : true,
+        width  : 400,
+    });
     var mainWidth = 720;
     var widthMargin = 120;
 
@@ -46,30 +49,35 @@ var notificationArea = (function(){
     var main = $(".main");
     var button = $("#open_button span");
 
-    var menuClosed = true;
     button.bind("click", function(){
-        if (menuClosed) {
-            resizeSidebar(sidebarWidth);
-            button.text("CLOSE");
-            menuClosed = false;
-        } else {
+        if (sidebarInfo.opened) {
             resizeSidebar(0);
             button.text("OPEN");
-            menuClosed = true;
+            sidebarInfo.opened = false;
+        } else {
+            resizeSidebar(sidebarInfo.width);
+            button.text("CLOSE");
+            sidebarInfo.opened = true;
         }
+        $.LocalStorage.set("sidebarInfo", sidebarInfo);
     });
+    if (sidebarInfo.opened) {
+        resizeSidebar(sidebarInfo.width);
+        button.text("CLOSE");
+    }
 
     var pos_x = undefined;
     $("body").bind("mouseup", function(){
         if (pos_x != undefined) {
             pos_x = undefined;
+            $.LocalStorage.set("sidebarInfo", sidebarInfo);
             enableAnimation();
         }
     }).bind("mousemove", function(e){
         if (pos_x != undefined) {
-            sidebarWidth += pos_x - e.screenX;
+            sidebarInfo.width += pos_x - e.screenX;
             pos_x = e.screenX;
-            resizeSidebar(sidebarWidth);
+            resizeSidebar(sidebarInfo.width);
         }
     });
     $("#notification_area #grip").bind("mousedown", function(e){
