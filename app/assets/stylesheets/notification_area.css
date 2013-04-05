@@ -14,6 +14,14 @@
     -moz-transition: width 0.1s ease-out;
 }
 
+#notification_area a {
+    color: white;
+    text-decoration: none;
+}
+#notification_area a:hover {
+    text-decoration: underline;
+}
+
 #notification_area #grip {
     cursor: ew-resize;
     height: 100%;
