@@ -13,6 +13,30 @@ var notificationArea = (function(){
         });
         notificationArea.css("width", ""+sidebarWidth+"px");
     }
+    function enableAnimation(){
+        $("#notification_area").css({
+            "transition" : "width 0.1s ease-out",
+            "-webkit-transition" : "width 0.1s ease-out",
+            "-moz-transition" : "width 0.1s ease-out",
+        });
+        $(".main").css({
+            "transition" : "transform 0.1s ease-out",
+            "-webkit-transition" : "-webkit-transform 0.1s ease-out",
+            "-moz-transition" : "-moz-transform 0.1s ease-out",
+        });
+    }
+    function disableAnimation(){
+        $("#notification_area").css({
+            "transition" : "none",
+            "-webkit-transition" : "none",
+            "-moz-transition" : "none",
+        });
+        $(".main").css({
+            "transition" : "none",
+            "-webkit-transition" : "none",
+            "-moz-transition" : "none",
+        });
+    }
 
     var sidebarWidth = 400;
     var mainWidth = 720;
@@ -37,7 +61,10 @@ var notificationArea = (function(){
 
     var pos_x = undefined;
     $("body").bind("mouseup", function(){
-        pos_x = undefined;
+        if (pos_x != undefined) {
+            pos_x = undefined;
+            enableAnimation();
+        }
     }).bind("mousemove", function(e){
         if (pos_x != undefined) {
             sidebarWidth += pos_x - e.screenX;
@@ -48,5 +75,6 @@ var notificationArea = (function(){
     $("#notification_area #grip").bind("mousedown", function(e){
         e.preventDefault();
         pos_x = e.screenX;
+        disableAnimation();
     });
 })();
