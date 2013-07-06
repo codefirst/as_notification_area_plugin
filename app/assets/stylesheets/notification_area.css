@@ -5,14 +5,21 @@
     top: 0px;
     right: 0px;
     width: 0px;
-    background: url(/grey_wash_wall_@2X.png);
+    background: url(/plugin/as_notification_area_plugin/image/grey_wash_wall_@2X.png);
     box-shadow: inset 10px 0px 10px rgba(0,0,0,0.4);
     -webkit-box-shadow: inset 10px 0px 10px rgba(0,0,0,0.4);
     -moz-box-shadow: inset 10px 0px 10px rgba(0,0,0,0.4);
     transition: width 0.1s ease-out;
     -webkit-transition: width 0.1s ease-out;
     -moz-transition: width 0.1s ease-out;
+    white-space: nowrap;
 }
+
+#notification_area * {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
 
 #notification_area a {
     color: white;
